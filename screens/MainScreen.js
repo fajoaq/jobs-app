@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import MapScreen from './MapScreen';
@@ -9,12 +10,15 @@ const MainScreen = () => {
     const MainTab = createBottomTabNavigator();
 
     return (
-        <MainTab.Navigator>
+        <MainTab.Navigator >
             <MainTab.Screen name="Map" component={ MapScreen } />
             <MainTab.Screen name="Deck" component={ DeckScreen } />
             <MainTab.Screen name="Review" component={ ReviewMain } />
         </MainTab.Navigator>
     );
 };
+
+const styles = StyleSheet.create({
+});
 
 export default MainScreen;

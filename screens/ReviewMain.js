@@ -6,7 +6,6 @@ import SettingsScreen from './SettingsScreen';
 
 const ReviewMain = () => {
     const ReviewStack = createStackNavigator();
-
     return (
         <ReviewStack.Navigator>
             <ReviewStack.Screen name="Review" component={ ReviewScreen } />
