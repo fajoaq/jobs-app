@@ -14,7 +14,7 @@ export default function App() {
     <NavigationContainer>
       <WelcomeMain.Navigator>
         <WelcomeMain.Screen name="Welcome" component={ WelcomeScreen } />
-        <WelcomeMain.Screen name="Sign In" component={ AuthScreen } />
+        <WelcomeMain.Screen name="Signin" component={ AuthScreen } />
         <WelcomeMain.Screen name="Main" component={ MainScreen} />
       </WelcomeMain.Navigator>
     </NavigationContainer>

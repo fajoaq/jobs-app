@@ -1,11 +1,25 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View, ScrollView, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
+import { Button } from 'react-native-elements';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 
-const Slides = ({ data }) => {
+const Slides = ({ data, onComplete }) => {
+
+    const renderConfirmButton = (index) => { 
+      if(index === data.length - 1) {
+        return (
+          <Button 
+            title="Done" 
+            onPress={ onComplete }
+            buttonStyle={ styles.buttonStyle } 
+          />
+        )
+      }
+      return null
+    };
 
     return (
         <View style={styles.container}>
@@ -20,6 +34,7 @@ const Slides = ({ data }) => {
                   style={[styles.slide, { backgroundColor: slide.color }]}
                 >
                   <Text style={styles.headerText}>{ slide.text }</Text>
+                  { renderConfirmButton(index) }
                 </View>
               ))
             }
@@ -40,7 +55,6 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH,
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row'
   },
   headerText: {
     fontSize: 30,
@@ -48,6 +62,10 @@ const styles = StyleSheet.create({
     margin: 10,
     color: 'white',
     fontWeight: "bold"
+  },
+  buttonStyle: {
+    backgroundColor: '#0288D1',
+    marginTop: 20
   }
 });
 

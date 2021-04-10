@@ -14,10 +14,14 @@ const SLIDE_DATA = [
     }
 ];
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
+    const onSlidesComplete = () => {
+        navigation.navigate('Signin')
+    };
+
     return (
         <View>
-            <Slides data={ SLIDE_DATA }/>
+            <Slides data={ SLIDE_DATA } onComplete={ onSlidesComplete }/>
         </View>
     );
 };
