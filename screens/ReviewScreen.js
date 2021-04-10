@@ -33,10 +33,11 @@ const styles = StyleSheet.create({
       backgroundColor:'rgba(0,0,0,0)'
     },
     buttonText: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontSize: 16
+      fontSize: 30,
+      textAlign: "center",
+      margin: 10,
+      color: 'white',
+      fontWeight: "bold"
     },
   });
 

@@ -5,12 +5,12 @@ import Slides from '../components/Slides';
 
 const SLIDE_DATA = [
     { 
-        id: 111,
-        text: "Job finder will help you find a local job!"
+        text: "Job finder will help you find a local job!",
+        color: '#F44336'
     },
     {
-        id: 222,
-        text: "Set your location, then swipe away."
+        text: "Set your location, then swipe away.",
+        color: '#9C27B0'
     }
 ];
 
