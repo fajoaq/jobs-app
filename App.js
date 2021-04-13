@@ -14,7 +14,7 @@ const RootStack = () => {
 
   return (
     <NavigationContainer>
-        <WelcomeMain.Navigator>
+        <WelcomeMain.Navigator screenOptions={{ tabBarVisible: false }}>
           <WelcomeMain.Screen name="Welcome" component={ WelcomeScreen } />
           <WelcomeMain.Screen name="Signin" component={ AuthScreen } />
           <WelcomeMain.Screen name="Main" component={ MainScreen} />
