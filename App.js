@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -24,10 +24,11 @@ const RootStack = () => {
 };
 
 export default function App() {
+  const [auth, authDispatch] = useReducer(AuthReducer, []);
   const authenticated = true;
 
   return (
-    <AuthContext.Provider value={{authenticated}}>
+    <AuthContext.Provider value={{auth, authDispatch}}>
       <RootStack />
     </AuthContext.Provider>
   );

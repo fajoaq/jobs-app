@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { View, Text } from 'react-native';
 
-import AuthContext from '../context/AuthContext';
+
 import Slides from '../components/Slides';
 
 const SLIDE_DATA = [
@@ -16,11 +16,6 @@ const SLIDE_DATA = [
 ];
 
 const WelcomeScreen = ({ navigation }) => {
-    const { authenticated } = useContext(AuthContext);
-
-    useEffect(() => {
-        if(authenticated) navigation.navigate('Main');
-    }, [])
 
     const onSlidesComplete = () => {
         navigation.navigate('Signin')
