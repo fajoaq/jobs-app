@@ -6,20 +6,29 @@ const FACEBOOK_LOGIN_SUCCESS = 'FACEBOOK_LOGIN_SUCCESS';
 const FACEBOOK_LOGIN_FAIL = 'FACEBOOK_LOGIN_FAIL';
 
 export const facebookLogin = (dispatch) => {
-    (async (dispatch) => {
-            let token = await AsyncStorage.getItem('fb_token');
+    (async () => {
+            let token = await fetchToken();
             if(token) {
-                console.log(token);
                 dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
             } else {
-                console.log('no token!');
                 doFacebookLogin(dispatch);
             }
         } 
     )();
 };
 
+export const fetchToken = async () => {
+    let token = await AsyncStorage.getItem('fb_token');
+
+    if(token) {
+        return token;
+    } else {
+        return undefined;
+    }
+}
+
 const doFacebookLogin = async (dispatch) => {
+
     try {
         await Facebook.initializeAsync({appId: FB_APP_ID});
     } catch (e) {
@@ -32,9 +41,7 @@ const doFacebookLogin = async (dispatch) => {
         }
     );
 
-    if(type === 'cancel') {
-       return dispatch({ type: FACEBOOK_LOGIN_FAIL, payload: {} });
-    }
+    if(type === 'cancel') dispatch({ type: FACEBOOK_LOGIN_FAIL });
 
     await AsyncStorage.setItem('fb_token', token);
     dispatch({ type: 'FACEBOOK_LOGIN_SUCCESS', payload: token });
