@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
+import React, { useEffect, useReducer, useState } from 'react';
+import { Button } from 'react-native-elements';
+import { View, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
 import MapView from 'react-native-maps';
+
+import JobsReducer from '../reducers/JobsReducer';
+import fetchJobs from '../actions/jobs';
 
 const MapScreen = ({ navigation }) => {
     const initCoords = {
@@ -11,6 +15,7 @@ const MapScreen = ({ navigation }) => {
     }
     const [loading, setLoading] = useState(true);
     const [region, setRegion] = useState(initCoords);
+    const [jobs, jobsDispatch] = useReducer(JobsReducer);
 
     useEffect(() => {
         navigation.setOptions({
@@ -18,6 +23,10 @@ const MapScreen = ({ navigation }) => {
         })
         setLoading(false);
     }, []);
+
+    const onButtonPress = () => {
+        fetchJobs(region, jobsDispatch);
+    };
 
     return (
         <View style={ styles.container}>
@@ -27,12 +36,23 @@ const MapScreen = ({ navigation }) => {
                     size="large" 
                     color="#0000ff" 
                 />
-                : 
-                <MapView 
-                    style={ styles.map } 
-                    region={ region }
-                    onRegionChangeComplete={ (region) => setRegion(region) }
-                /> 
+                :
+                <View>
+                    <MapView 
+                        style={ styles.map } 
+                        region={ region }
+                        onRegionChangeComplete={ (newRegion) => setRegion(newRegion) }
+                    />
+                    <View style={ styles.buttonContainer }>
+                        <Button 
+                            title="Search This Area"
+                            backgroundColor="#009688"
+                            icon={{ name: 'search' }}
+                            onPress={ onButtonPress }
+                            buttonStyle={ styles.button}
+                        />
+                    </View>
+                </View>
             }
         </View>
     );
@@ -44,6 +64,15 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    buttonContainer: {
+        position: 'absolute',
+        bottom: 40,
+        left: 60,
+        right: 60
+    },
+    button: {
+        backgroundColor: '#009688'
     },
     map: {
       width: Dimensions.get('window').width,

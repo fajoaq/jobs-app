@@ -5,16 +5,13 @@ import FB_APP_ID from '../api/facebook';
 const FACEBOOK_LOGIN_SUCCESS = 'FACEBOOK_LOGIN_SUCCESS';
 const FACEBOOK_LOGIN_FAIL = 'FACEBOOK_LOGIN_FAIL';
 
-export const facebookLogin = (dispatch) => {
-    (async () => {
-            let token = await fetchToken();
-            if(token) {
-                dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
-            } else {
-                doFacebookLogin(dispatch);
-            }
-        } 
-    )();
+export const facebookLogin = async (dispatch) => {
+    let token = await fetchToken();
+    if(token) {
+        dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+    } else {
+        doFacebookLogin(dispatch);
+    }
 };
 
 export const fetchToken = async () => {
@@ -28,7 +25,6 @@ export const fetchToken = async () => {
 }
 
 const doFacebookLogin = async (dispatch) => {
-
     try {
         await Facebook.initializeAsync({appId: FB_APP_ID});
     } catch (e) {
