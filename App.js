@@ -3,9 +3,11 @@ import React, { useReducer, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AppLoading from 'expo-app-loading';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+/* import AsyncStorage from '@react-native-async-storage/async-storage'; */
 
 import { fetchToken } from './actions/auth';
+import JobsReducer from './reducers/JobsReducer';
+import JobsContext from './context/JobsContext';
 import AuthReducer from './reducers/AuthReducer';
 import AuthContext from './context/AuthContext';
 import AuthScreen from './screens/AuthScreen';
@@ -32,6 +34,7 @@ const RootStack = ({ initialScreen }) => {
 
 export default function App() {
   const [auth, authDispatch] = useReducer(AuthReducer, {token : null});
+  const [jobs, jobsDispatch] = useReducer(JobsReducer, []);
   const [initScreen, setInitScreen] = useState('');
   const [loading, setLoading]  = useState(true);
 
@@ -54,8 +57,10 @@ export default function App() {
   }, []);
 
   return (
-    <AuthContext.Provider value={{auth, authDispatch}}>
-      { loading ? <AppLoading /> :  <RootStack initialScreen={ initScreen }/> }
+    <AuthContext.Provider value={{ auth, authDispatch }}>
+      <JobsContext.Provider value={{ jobs, jobsDispatch }}>
+        { loading ? <AppLoading /> :  <RootStack initialScreen={ initScreen }/> }
+      </JobsContext.Provider>
     </AuthContext.Provider>
   );
 };

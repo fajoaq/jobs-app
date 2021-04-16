@@ -1,9 +1,9 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Button } from 'react-native-elements';
 import { View, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
 import MapView from 'react-native-maps';
 
-import JobsReducer from '../reducers/JobsReducer';
+import JobsContext from '../context/JobsContext';
 import fetchJobs from '../actions/jobs';
 
 const MapScreen = ({ navigation }) => {
@@ -15,7 +15,8 @@ const MapScreen = ({ navigation }) => {
     }
     const [loading, setLoading] = useState(true);
     const [region, setRegion] = useState(initCoords);
-    const [jobs, jobsDispatch] = useReducer(JobsReducer);
+    const { jobsDispatch } = useContext(JobsContext);
+    
 
     useEffect(() => {
         navigation.setOptions({
@@ -26,6 +27,7 @@ const MapScreen = ({ navigation }) => {
 
     const onButtonPress = () => {
         fetchJobs(region, jobsDispatch);
+        navigation.navigate('Deck');
     };
 
     return (
