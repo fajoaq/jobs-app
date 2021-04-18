@@ -8,6 +8,9 @@ const JOB_QUERY_PARAMS = {
     description: 'web'
 }
 
+const likeJob = (job, dispatch) => {
+    dispatch({ type: 'LIKE_JOB', payload: job })
+}
 
 const fetchJobs = async (region, dispatch) => {
     try {
@@ -30,4 +33,4 @@ const buildJobsUrl = (region) => {
     return GITHUB_API_ROOT + query;
 };
 
-export default fetchJobs;
+export { fetchJobs as default, likeJob };
