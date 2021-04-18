@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 
 import Slides from '../components/Slides';
-import AuthContext from '../context/AuthContext';
 
 const SLIDE_DATA = [
     { 

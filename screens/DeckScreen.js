@@ -5,6 +5,7 @@ import MapView from 'react-native-maps';
 
 import JobsContext from '../context/JobsContext';
 import Deck from '../components/Deck';
+import Spinner from '../components/Spinner';
 
 const DeckScreen = ({ navigation, route }) => {
     const { region } = route.params;
@@ -63,7 +64,7 @@ const DeckScreen = ({ navigation, route }) => {
                 onSwipeRight={ (job) => jobsDispatch({ type: 'LIKE_JOB', payload: job }) }
             />
             :
-            null
+            <Spinner />
             }
         </View>            
     );

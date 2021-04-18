@@ -3,14 +3,19 @@ import { View, Text } from 'react-native';
 /* import AsyncStorage from '@react-native-async-storage/async-storage'; */
 
 import { facebookLogin } from '../actions/auth';
+import Spinner from '../components/Spinner';
 import AuthContext from '../context/AuthContext';
 
 const AuthScreen = ({ navigation }) => {
     const { auth, authDispatch } = useContext(AuthContext);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         /* AsyncStorage.removeItem('fb_token'); */
-        facebookLogin(authDispatch);
+        (async () => {
+            const isLoading = await facebookLogin(authDispatch);
+            setLoading(isLoading);
+        })();
     }, []);
 
 
@@ -21,7 +26,15 @@ const AuthScreen = ({ navigation }) => {
         }
     }, [auth])
 
-    return <React.Fragment />;
+    return (
+        <View>
+            { loading ?
+                <Spinner />
+                :
+                <React.Fragment />
+            }
+        </View>
+    );
 };
 
 export default AuthScreen;

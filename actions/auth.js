@@ -9,8 +9,10 @@ export const facebookLogin = async (dispatch) => {
     let token = await fetchToken();
     if(token) {
         dispatch({ type: FACEBOOK_LOGIN_SUCCESS, payload: token });
+        return false;
     } else {
         doFacebookLogin(dispatch);
+        return false;
     }
 };
 

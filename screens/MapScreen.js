@@ -5,6 +5,7 @@ import MapView from 'react-native-maps';
 
 import JobsContext from '../context/JobsContext';
 import fetchJobs from '../actions/jobs';
+import Spinner from '../components/Spinner';
 
 const MapScreen = ({ navigation }) => {
     const initCoords = {
@@ -13,9 +14,9 @@ const MapScreen = ({ navigation }) => {
         longitudeDelta: 0.04,
         latitudeDelta: 0.09
     }
-    const [loading, setLoading] = useState(true);
     const [region, setRegion] = useState(initCoords);
     const { jobsDispatch } = useContext(JobsContext);
+    const [loading, setLoading] = useState(true);
     
 
     useEffect(() => {
@@ -33,11 +34,7 @@ const MapScreen = ({ navigation }) => {
     return (
         <View style={ styles.container}>
             { loading ? 
-                <ActivityIndicator 
-                    style={ styles.map } 
-                    size="large" 
-                    color="#0000ff" 
-                />
+                <Spinner />
                 :
                 <View>
                     <MapView 
