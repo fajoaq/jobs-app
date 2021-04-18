@@ -57,14 +57,14 @@ const DeckScreen = ({ navigation, route }) => {
     return (
         <View style={ styles.constainer }>
             { jobsData ? 
-            <Deck 
-                data={ jobsData.jobs }
-                renderCard={ renderCard }
-                renderNoMoreCards={ renderNoMoreCards }
-                onSwipeRight={ (job) => likeJob(job, jobsDispatch) }
-            />
-            :
-            <Spinner />
+                <Deck 
+                    data={ jobsData.jobs }
+                    renderCard={ renderCard }
+                    renderNoMoreCards={ renderNoMoreCards }
+                    onSwipeRight={ (job) => likeJob(job, jobsDispatch) }
+                />
+                :
+                <Spinner />
             }
         </View>            
     );

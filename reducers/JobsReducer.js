@@ -8,10 +8,15 @@ const JobsReducer = (state = defaultState, action) => {
         case 'FETCH_JOBS':
             return { jobs: action.payload, likedJobs: state.likedJobs };
         case 'LIKE_JOB':
+            const oldLikedList = state.likedJobs.filter((job) => {
+                    return job.id !== action.payload.id;
+                } 
+            );
             const newLikedList = [
-                ...state.likedJobs,
-                action.payload
-            ];
+                ...oldLikedList,
+                { id: action.payload.id }
+            ]
+            console.log(newLikedList);
             return { jobs: state.jobs, likedJobs: newLikedList };
         default: return state;
     }

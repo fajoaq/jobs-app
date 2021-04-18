@@ -19,8 +19,9 @@ const Deck = ({
     renderNoMoreCards
     }) => {
     const position = useRef(new Animated.ValueXY()).current;
+    const [indexBuffer, setIndexBuffer] = useState(0);
     const [index, setIndex] = useState(0);
-
+    
     const panResponder = useMemo(
         () =>
         PanResponder.create({
@@ -38,7 +39,7 @@ const Deck = ({
                 }
             }
         })
-    , []);
+    );
 
     const resetPosition = () => {
         Animated.spring(position, {
@@ -60,10 +61,7 @@ const Deck = ({
 
         direction === 1 ? onSwipeRight(item) : onSwipeLeft(item);
         position.setValue({ x: 0, y: 0 });
-        setIndex(prevIndex => prevIndex + 1);
-
-        UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+        setIndexBuffer(index + 1);
     };
 
     const getCardStyle = () => {
@@ -109,8 +107,14 @@ const Deck = ({
     };
 
     useEffect(() => {
-        setIndex(0);
-    }, [data]);
+        UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+    }, [])
+
+    useEffect(() => {
+        console.log('index ', index, 'buffer ', indexBuffer);
+        setIndex(indexBuffer);
+    }, [indexBuffer]);
 
     return <React.Fragment>
         { renderCards() }
