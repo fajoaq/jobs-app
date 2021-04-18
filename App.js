@@ -34,7 +34,7 @@ const RootStack = ({ initialScreen }) => {
 
 export default function App() {
   const [auth, authDispatch] = useReducer(AuthReducer, {token : null});
-  const [jobs, jobsDispatch] = useReducer(JobsReducer, []);
+  const [jobsData, jobsDispatch] = useReducer(JobsReducer);
   const [initScreen, setInitScreen] = useState('');
   const [loading, setLoading]  = useState(true);
 
@@ -58,7 +58,7 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={{ auth, authDispatch }}>
-      <JobsContext.Provider value={{ jobs, jobsDispatch }}>
+      <JobsContext.Provider value={{ jobsData, jobsDispatch }}>
         { loading ? <AppLoading /> :  <RootStack initialScreen={ initScreen }/> }
       </JobsContext.Provider>
     </AuthContext.Provider>

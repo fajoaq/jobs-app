@@ -13,7 +13,7 @@ const fetchJobs = async (region, dispatch) => {
     try {
         const url = buildJobsUrl(region);
         const { data } = await axios.get(url);
-
+        
         dispatch({ type: 'FETCH_JOBS', payload: data})
     } catch (e) {
         console.log(e);

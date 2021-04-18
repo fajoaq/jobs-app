@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Card, Button } from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import MapView from 'react-native-maps';
 
 import JobsContext from '../context/JobsContext';
@@ -8,7 +8,8 @@ import Deck from '../components/Deck';
 
 const DeckScreen = ({ navigation, route }) => {
     const { region } = route.params;
-    const { jobs } = useContext(JobsContext);
+    const { jobsData, jobsDispatch } = useContext(JobsContext);
+    const [loading, setLoading]  = useState(true);
 
     const renderCard = (job) => {
         const description = job.description.substring(0, 150)
@@ -53,13 +54,17 @@ const DeckScreen = ({ navigation, route }) => {
 
     return (
         <View style={ styles.constainer }>
+            { jobsData ? 
             <Deck 
-                data={ jobs }
+                data={ jobsData.jobs }
                 renderCard={ renderCard }
                 renderNoMoreCards={ renderNoMoreCards }
                 onSwipeLeft={ () => {} }
-                onSwipeRight={ () => {} }
+                onSwipeRight={ (job) => jobsDispatch({ type: 'LIKE_JOB', payload: job }) }
             />
+            :
+            null
+            }
         </View>            
     );
 };
@@ -76,11 +81,3 @@ const styles = StyleSheet.create({
 })
 
 export default DeckScreen;
-
-/* { (jobs.length > 0) && 
-    <View>
-        { jobs.map((job) => 
-            <Text key={job.id}>{ job.id }</Text>    
-        )}
-    </View>
-} */
