@@ -87,7 +87,7 @@ const Deck = ({
             if(i === index) {
                 return (
                     <Animated.View 
-                        key={ item.id }
+                        key={ `animated_view_${i}` }
                         style={[ getCardStyle(), styles.card ]}
                         { ...panResponder.panHandlers }
                     >
@@ -97,7 +97,7 @@ const Deck = ({
             } //else
             return (
                 <Animated.View 
-                    key={ item.id } 
+                    key={ `animated_view_${i}` } 
                     style={[styles.card, { 
                         top: 5 * (i - index)                        
                     }]}
