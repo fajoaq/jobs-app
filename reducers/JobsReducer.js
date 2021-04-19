@@ -18,6 +18,8 @@ const JobsReducer = (state = defaultState, action) => {
             ]
             console.log(newLikedList);
             return { jobs: state.jobs, likedJobs: newLikedList };
+        case 'CLEAR_LIKED_JOBS':
+            return defaultState;
         default: return state;
     }
 };

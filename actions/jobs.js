@@ -12,6 +12,10 @@ const likeJob = (id, initialRegion, dispatch) => {
     dispatch({ type: 'LIKE_JOB', payload: { id, initialRegion} })
 }
 
+const clearLikedJobs = (dispatch) => {
+    dispatch({ type: 'CLEAR_LIKED_JOBS' });
+}
+
 const fetchJobs = async (region, dispatch) => {
     try {
         const url = buildJobsUrl(region);
@@ -48,4 +52,4 @@ const buildJobsUrl = (region) => {
     return GITHUB_API_ROOT + query;
 };
 
-export { fetchJobs as default, likeJob, fetchJobsById };
+export { fetchJobs as default, likeJob, fetchJobsById, clearLikedJobs };
