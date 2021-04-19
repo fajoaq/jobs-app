@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   title: {
     height: 30,
     borderBottomWidth: 1,
-    borderBottomColor: '#CCCCCC',
+    borderBottomColor: '#CCCCCC'
   },
   applyButton: {
     marginHorizontal: 20,

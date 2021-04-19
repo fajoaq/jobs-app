@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import JobsContext from '../context/JobsContext';
@@ -18,10 +18,18 @@ const SettingsScreen = ({ navigation }) => {
         <View>
             <Button 
                 title="Clear Jobs"
+                icon={{ name: 'delete-forever' }}
+                buttonStyle={ styles.deleteButton }
                 onPress={ onClearJobs }
             />
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    deleteButton: {
+        backgroundColor: 'red'
+    }
+})
 
 export default SettingsScreen;
