@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card } from 'react-native-elements';
 import MapView from 'react-native-maps';
@@ -54,17 +54,21 @@ const DeckScreen = ({ navigation, route }) => {
         );
     }
 
+    useEffect(() => {
+        if(jobsData) setLoading(false);
+    }, [jobsData])
+
     return (
         <View style={ styles.constainer }>
-            { jobsData ? 
+            { loading ? 
+                <Spinner />
+                :
                 <Deck 
                     data={ jobsData.jobs }
                     renderCard={ renderCard }
                     renderNoMoreCards={ renderNoMoreCards }
                     onSwipeRight={ (job) => likeJob(job, jobsDispatch) }
-                />
-                :
-                <Spinner />
+                 />
             }
         </View>            
     );
