@@ -16,7 +16,6 @@ const SLIDE_DATA = [
 ];
 
 const WelcomeScreen = ({ navigation }) => {
-
     const onSlidesComplete = () => {
         navigation.navigate('Signin')
     };

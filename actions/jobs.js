@@ -1,4 +1,3 @@
-/* const reverseGeocode = require('latlng-to-zip'); */
 const qs = require('qs');
 import axios from 'axios';
 
@@ -26,7 +25,6 @@ const fetchJobs = async (region, dispatch) => {
 
 const fetchJobsById = async (jobs) => {
     let likedJobs = await Promise.all(jobs.map(async (job) => {
-
         try {
             const url = GITHUB_API_ROOT_SINGLE + job.id + '.json?';
             let { data } = await axios.get(url);

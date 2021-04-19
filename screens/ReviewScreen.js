@@ -41,8 +41,8 @@ const ReviewScreen = ({ navigation }) => {
               <Text style={ styles.italics }>{ created_at}</Text>
             </View>
             <Button 
-              title="Apply Now!" 
-              buttonStyle={ styles.button}
+              title="Apply Now!"
+              buttonStyle={ styles.applyButton}
               onPress={ () => Linking.openURL(url) }
             />
           </View>
@@ -67,13 +67,18 @@ const ReviewScreen = ({ navigation }) => {
 
   useEffect(() => {
     (async () => {
-      let data = await fetchJobsById(jobsData.likedJobs)
-      setLikedJobs(data)
+      if(jobsData){
+        let data = await fetchJobsById(jobsData.likedJobs)
+
+        if(data) setLikedJobs(data)
+      }
     })();
+
+    if(!jobsData) setLoading(false);
   }, [jobsData]);
 
   useEffect(() => {
-    if(likedJobs.length > 0) setLoading(false);
+    if(jobsData && likedJobs.length > 0) setLoading(false);
   },[likedJobs])
 
   return (
@@ -81,9 +86,15 @@ const ReviewScreen = ({ navigation }) => {
           { loading ? 
             <Spinner />
             :
-            <ScrollView>
-              { renderLikedJobs() }
-            </ScrollView>
+            <React.Fragment>
+            { likedJobs.length <= 0 ?
+              <Text>Like some jobs.</Text>
+              :
+              <ScrollView>
+                { renderLikedJobs() }
+              </ScrollView>
+            }
+            </React.Fragment>
           }
       </View>
   );
@@ -94,7 +105,7 @@ const styles = StyleSheet.create({
     backgroundColor:'rgba(0,0,0,0)'
   },
   applyButton: {
-    backgroundColor:'#03A9F4'
+    backgroundColor:'#009688'
   },
   settingsText: {
     fontSize: 20,
