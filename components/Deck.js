@@ -112,12 +112,11 @@ const Deck = ({
     }, [])
 
     useEffect(() => {
-        console.log('index ', index, 'buffer ', indexBuffer)
+        /* console.log('index ', index, 'buffer ', indexBuffer) */
         setIndex(indexBuffer);
     }, [indexBuffer]);
 
     useEffect(() => {
-        setIndex(0);
         setIndexBuffer(0);
     }, [data]);
 

@@ -13,7 +13,7 @@ const JobsReducer = (state = defaultState, action) => {
                 } 
             );
             const newLikedList = [
-                { id: action.payload.id },
+                { ...action.payload },
                 ...oldLikedList
             ]
             console.log(newLikedList);

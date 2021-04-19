@@ -10,6 +10,11 @@ import Spinner from '../components/Spinner';
 
 const DeckScreen = ({ route }) => {
     const { region } = route.params;
+    const initialRegion = {
+        ...region,
+        latitudeDelta: 0.045,
+        longitudeDelta: 0.02
+    }
     const { jobsData, jobsDispatch } = useContext(JobsContext);
     const [loading, setLoading]  = useState(true);
 
@@ -26,18 +31,19 @@ const DeckScreen = ({ route }) => {
                         scrollEnabled={ false }
                         cacheEnabled={ true }
                         style={{ flex: 1}}
-                        initialRegion={{ 
-                            ...region,
-                            latitudeDelta: 0.045,
-                            longitudeDelta: 0.02
-                        }}
+                        initialRegion={ initialRegion }
                     >
                     </MapView>
                 </View>
                 <Card.Title>{ job.title }</Card.Title>
-                <View style={ styles.detailContainer }>
-                    <Text>{ job.company }</Text>
-                    <Text>{ job.created_at }</Text>
+                <View style={ styles.detailsContainer }>
+                    <Text style={styles.italics}>{ 
+                        job.company.length > 16 ?
+                        job.company.substring(0, 16) + '...' 
+                        : 
+                        job.company.substring(0, 16) 
+                    }</Text>
+                    <Text style={ styles.italics }>{ job.created_at }</Text>
                 </View>
                 <View>
                     <Text>{ description + '...' }</Text>
@@ -67,8 +73,8 @@ const DeckScreen = ({ route }) => {
                     data={ jobsData.jobs }
                     renderCard={ renderCard }
                     renderNoMoreCards={ renderNoMoreCards }
-                    onSwipeRight={ (job) => likeJob(job, jobsDispatch) }
-                 />
+                    onSwipeRight={ (job) => likeJob(job.id, initialRegion, jobsDispatch) }
+                />
             }
         </View>            
     );
@@ -78,10 +84,13 @@ const styles = StyleSheet.create({
     constainer: {
         marginTop: 20
     },
-    detailContainer: {
+    detailsContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         marginBottom: 10
+    },
+    italics: {
+        fontStyle: 'italic'
     }
 })
 
