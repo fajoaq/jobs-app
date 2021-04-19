@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text } from 'react-native';
+import { Button } from 'react-native-elements';
 
-const SettingsScreen = () => {
+import JobsContext from '../context/JobsContext';
+import { clearLikedJobs } from '../actions/jobs';
+
+const SettingsScreen = ({ navigation }) => {
+    const { jobsDispatch } = useContext(JobsContext);
+
+    const onClearJobs = () => {
+        clearLikedJobs(jobsDispatch);
+        navigation.navigate('Main', { screen: 'Map'});
+    }
+
     return (
         <View>
-            <Text>SettingsScreen</Text>
-            <Text>SettingsScreen</Text>
-            <Text>SettingsScreen</Text>
-            <Text>SettingsScreen</Text>
-            <Text>SettingsScreen</Text>
+            <Button 
+                title="Clear Jobs"
+                onPress={ onClearJobs }
+            />
         </View>
     );
 };
