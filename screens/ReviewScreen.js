@@ -51,6 +51,20 @@ const ReviewScreen = ({ navigation }) => {
       )});
   };
 
+  const renderNoMoreCards = () => {
+    return (
+        <Card>
+            <Card.Title style={ styles.title }>Like some jobs.</Card.Title>
+            <Button 
+                title="New Search" 
+                icon={{ name: 'my-location' }}
+                buttonStyle={ styles.searchButton}
+                onPress={ () => navigation.navigate('Map') }
+            />
+        </Card>
+    );
+}
+
   useEffect(() => {
     navigation.setOptions({
       headerTitle: "Review Jobs",
@@ -89,7 +103,7 @@ const ReviewScreen = ({ navigation }) => {
             :
             <React.Fragment>
             { likedJobs.length <= 0 ?
-              <Text>Like some jobs.</Text>
+              renderNoMoreCards()
               :
               <ScrollView>
                 { renderLikedJobs() }
@@ -111,6 +125,10 @@ const styles = StyleSheet.create({
     borderBottomColor: '#CCCCCC'
   },
   applyButton: {
+    marginHorizontal: 20,
+    backgroundColor:'#009688'
+  },
+  searchButton: {
     marginHorizontal: 20,
     backgroundColor:'#009688'
   },
