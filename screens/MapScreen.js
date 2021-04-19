@@ -21,8 +21,9 @@ const MapScreen = ({ navigation }) => {
 
     useEffect(() => {
         navigation.setOptions({
-            headerTitle: "Maps"
-        })
+            headerTitle: "Map"
+        });
+
         setLoading(false);
     }, []);
 

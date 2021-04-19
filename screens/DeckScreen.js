@@ -64,7 +64,7 @@ const DeckScreen = ({ navigation, route }) => {
     const renderNoMoreCards = () => {
         return (
             <Card>
-                <Card.Title style={ styles.title }>No more jobs.</Card.Title>
+                <Card.Title style={ styles.title }>No More Jobs</Card.Title>
                 <Button 
                     title="New Search" 
                     icon={{ name: 'my-location' }}
