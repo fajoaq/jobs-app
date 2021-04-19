@@ -20,11 +20,12 @@ const ReviewScreen = ({ navigation }) => {
 
   const renderLikedJobs = () => {
     return likedJobs.map((job) => {
-      const { id, company, created_at, url, initialRegion } = job;
+      const { id, title, company, created_at, url, initialRegion } = job;
 
       return(
         <Card key={ id }>
-          <View style={{ height: 200 }}>
+          <View style={{ height: 250 }}>
+            <Card.Title  style={ styles.title }>{ title }</Card.Title>
             <MapView 
               style={{ flex: 1 }}
               cacheEnabled={ true }
@@ -32,12 +33,12 @@ const ReviewScreen = ({ navigation }) => {
               initialRegion={ initialRegion }
             />
             <View style={ styles.detailsContainer}>
-              <Card.Title style={styles.italics}>{ 
+              <Text style={styles.italics}>{ 
                 company.length > 16 ?
                 company.substring(0, 16) + '...' 
                 : 
                 company.substring(0, 16) 
-              }</Card.Title>
+              }</Text>
               <Text style={ styles.italics }>{ created_at}</Text>
             </View>
             <Button 
@@ -104,7 +105,13 @@ const styles = StyleSheet.create({
   settingsButton: {
     backgroundColor:'rgba(0,0,0,0)'
   },
+  title: {
+    height: 30,
+    borderBottomWidth: 1,
+    borderBottomColor: '#CCCCCC',
+  },
   applyButton: {
+    marginHorizontal: 20,
     backgroundColor:'#009688'
   },
   settingsText: {
@@ -117,7 +124,7 @@ const styles = StyleSheet.create({
   detailsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 10
+    marginVertical: 10
   },
   italics: {
     fontStyle: 'italic'
