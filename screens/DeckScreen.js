@@ -8,7 +8,7 @@ import Deck from '../components/Deck';
 import { likeJob } from '../actions/jobs';
 import Spinner from '../components/Spinner';
 
-const DeckScreen = ({ navigation, route }) => {
+const DeckScreen = ({ route }) => {
     const { region } = route.params;
     const { jobsData, jobsDispatch } = useContext(JobsContext);
     const [loading, setLoading]  = useState(true);

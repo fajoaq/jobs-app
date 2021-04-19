@@ -1,7 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
+import JobsContext from '../context/JobsContext';
+import { fetchJobsById } from '../actions/jobs';
+import Spinner from '../components/Spinner';
+
 const ReviewScreen = ({ navigation }) => {
+    const { jobsData } = useContext(JobsContext);
+    const [likedJobs, setLikedJobs] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         navigation.setOptions({
             headerTitle: "Review Jobs",
@@ -18,12 +26,29 @@ const ReviewScreen = ({ navigation }) => {
         })
     }, []);
     
+    useEffect(() => {
+      (async () => {
+        let data = await fetchJobsById(jobsData.likedJobs)
+        setLikedJobs(data)
+      })();
+    }, [jobsData]);
+
+    useEffect(() => {
+      if(likedJobs.length > 0) setLoading(false);
+    },[likedJobs])
+
     return (
         <View style={styles.container}>
-            <Text style={{color:'#888', fontSize:20}}>Review Screen</Text>
-            <Text style={{color:'#888', fontSize:20}}>Review Screen</Text>
-            <Text style={{color:'#888', fontSize:20}}>Review Screen</Text>
-            <Text style={{color:'#888', fontSize:20}}>Review Screen</Text>
+            { loading ? 
+              <Spinner />
+              :
+              <View>
+              { likedJobs.map((job) => (
+                  <Text key={ job.id }>{ job.id}</Text>
+                ))
+              }
+              </View>
+            }
         </View>
     );
 };
