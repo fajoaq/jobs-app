@@ -9,14 +9,23 @@ import { likeJob } from '../actions/jobs';
 import Spinner from '../components/Spinner';
 
 const DeckScreen = ({ route }) => {
-    const { region } = route.params;
-    const initialRegion = {
-        ...region,
-        latitudeDelta: 0.045,
-        longitudeDelta: 0.02
-    }
     const { jobsData, jobsDispatch } = useContext(JobsContext);
     const [loading, setLoading]  = useState(true);
+    let initialRegion = {
+        lat: 37.3229978,
+        long: -122.0321823,
+        latitudeDelta: 0.045,
+        longitudeDelta: 0.02
+    };
+
+    if(route.params) {
+        const { region } = route.params;
+        initialRegion = {
+            ...region,
+            latitudeDelta: 0.045,
+            longitudeDelta: 0.02
+        }
+    }
 
     const renderCard = (job) => {
         const description = job.description.substring(0, 150)
@@ -61,7 +70,7 @@ const DeckScreen = ({ route }) => {
     }
 
     useEffect(() => {
-        if(jobsData) setLoading(false);
+        if(jobsData || !route.params) setLoading(false);
     }, [jobsData])
 
     return (
@@ -69,12 +78,18 @@ const DeckScreen = ({ route }) => {
             { loading ? 
                 <Spinner />
                 :
-                <Deck 
-                    data={ jobsData.jobs }
-                    renderCard={ renderCard }
-                    renderNoMoreCards={ renderNoMoreCards }
-                    onSwipeRight={ (job) => likeJob(job.id, initialRegion, jobsDispatch) }
-                />
+                <View>
+                    { (jobsData && route.params) ?
+                        <Deck 
+                            data={ jobsData.jobs }
+                            renderCard={ renderCard }
+                            renderNoMoreCards={ renderNoMoreCards }
+                            onSwipeRight={ (job) => likeJob(job.id, initialRegion, jobsDispatch) }
+                        />
+                        :
+                        renderNoMoreCards()
+                    }
+                </View>
             }
         </View>            
     );
