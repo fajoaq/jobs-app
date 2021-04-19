@@ -13,8 +13,8 @@ const JobsReducer = (state = defaultState, action) => {
                 } 
             );
             const newLikedList = [
-                ...oldLikedList,
-                { id: action.payload.id }
+                { id: action.payload.id },
+                ...oldLikedList
             ]
             console.log(newLikedList);
             return { jobs: state.jobs, likedJobs: newLikedList };
