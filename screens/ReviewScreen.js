@@ -59,7 +59,7 @@ const ReviewScreen = ({ navigation }) => {
                 title="New Search" 
                 icon={{ name: 'my-location' }}
                 buttonStyle={ styles.searchButton}
-                onPress={ () => navigation.navigate('Map') }
+                onPress={ () => navigation.navigate('map') }
             />
         </Card>
     );
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     margin: 10,
-    color: 'white',
+    color: 'black',
     fontWeight: "bold"
   },
   detailsContainer: {

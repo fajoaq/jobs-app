@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Card, Button } from 'react-native-elements';
+import { Card, Button, Icon } from 'react-native-elements';
 import MapView from 'react-native-maps';
 
 import JobsContext from '../context/JobsContext';
@@ -69,11 +69,24 @@ const DeckScreen = ({ navigation, route }) => {
                     title="New Search" 
                     icon={{ name: 'my-location' }}
                     buttonStyle={ styles.searchButton}
-                    onPress={ () => navigation.navigate('Map') }
+                    onPress={ () => navigation.navigate('map') }
                 />
             </Card>
         );
     }
+
+    useEffect(() => {
+        navigation.setOptions({
+            tabBarLabel: "Jobs",
+            tabBarIcon: ({ focused }) => (
+                <Icon
+                    name='description'
+                    size={ 25 }
+                    color={ focused ? '#4876FF' : '#999999'}
+                />
+            )
+        });
+    }, []);
 
     useEffect(() => {
         if(jobsData || !route.params) setLoading(false);

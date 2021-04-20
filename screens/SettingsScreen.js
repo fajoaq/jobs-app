@@ -11,7 +11,7 @@ const SettingsScreen = ({ navigation }) => {
     const onClearJobs = () => {
         clearLikedJobs(jobsDispatch);
         navigation.goBack();
-        navigation.navigate('Main', { screen: 'Map'});
+        navigation.navigate('Main', { screen: 'map'});
     }
 
     return (

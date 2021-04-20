@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import MapView from 'react-native-maps';
 
@@ -21,7 +21,14 @@ const MapScreen = ({ navigation }) => {
 
     useEffect(() => {
         navigation.setOptions({
-            headerTitle: "Map"
+            tabBarLabel: "Map",
+            tabBarIcon: ({ focused }) => (
+                <Icon
+                    name='my-location'
+                    size={ 25 }
+                    color={ focused ? '#4876FF' : '#999999'}
+                />
+            )
         });
 
         setLoading(false);
@@ -29,7 +36,7 @@ const MapScreen = ({ navigation }) => {
 
     const onButtonPress = () => {
         fetchJobs(region, jobsDispatch);
-        navigation.navigate('Deck', { region });
+        navigation.navigate('deck', { region });
     };
 
     return (

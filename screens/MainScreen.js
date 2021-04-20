@@ -11,25 +11,27 @@ const MainScreen = () => {
     const MainTab = createBottomTabNavigator();
 
     return (
-        <MainTab.Navigator>
-            <MainTab.Screen name="Map" component={ MapScreen } 
+        <MainTab.Navigator lazy={ false } tabBarOptions={{ labelStyle: styles.tabLabel }} >
+            <MainTab.Screen name="map" component={ MapScreen } options={{tabBarLabel: ''}}/>
+            <MainTab.Screen name="deck" component={ DeckScreen } options={{tabBarLabel: ''}}/>
+            <MainTab.Screen name="review" component={ ReviewMain } 
                 options={{
+                    tabBarLabel: "Review Jobs",
                     tabBarIcon: ({ focused }) => (
                         <Icon
-                            name='my-location'
+                            name='favorite'
                             size={ 25 }
-                            color={ focused ? '#009688' : '#999999'}
+                            color={ focused ? '#4876FF' : '#999999'}
                         />
                     )
                 }}
             />
-            <MainTab.Screen name="Deck" component={ DeckScreen } />
-            <MainTab.Screen name="Review" component={ ReviewMain } />
         </MainTab.Navigator>
     );
 };
 
 const styles = StyleSheet.create({
+    tabLabel: { fontSize: 12 }
 });
 
 export default MainScreen;
