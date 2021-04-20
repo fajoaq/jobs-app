@@ -13,6 +13,7 @@ import AuthContext from './context/AuthContext';
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import MainScreen from './screens/MainScreen'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RootStack = ({ initialScreen }) => {
   const WelcomeMain = createBottomTabNavigator();
@@ -45,6 +46,9 @@ export default function App() {
       const token = await fetchToken();
 
       if(token) {
+        const data = await AsyncStorage.getItem('likedJobs');
+        if(data) jobsDispatch({ type: 'REHYDRATE', payload: data });
+
         authDispatch({ type: 'FACEBOOK_LOGIN_SUCCESS', payload: token });
         setInitScreen('Main');
       } else {
