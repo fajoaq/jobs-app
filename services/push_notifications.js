@@ -1,10 +1,6 @@
-import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-
-const PUSH_ENDPOINT = 'http://rallycode.herokuapp/api/tokens'
 
 export default async (notifyDispatch) => 
 {
@@ -23,7 +19,8 @@ export default async (notifyDispatch) =>
         return;
       }
       const token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log(token);
+/*       console.log(token); */
+
       notifyDispatch({ type: 'NEW_NOTIFICATION', payload: token });
     } else {
       alert('Must use physical device for Push Notifications');
@@ -38,25 +35,3 @@ export default async (notifyDispatch) =>
       });
     }
 };
-
-//Old code
-/* {
-    let previousToken = await AsyncStorage.getItem('pushToken');
-    console.log(previousToken);
-
-    if(previousToken) {
-        return;
-    } else {
-        let { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-
-        if(status !== 'granted')  return;
-
-        let token = await Notifications.getExpoPushTokenAsync();
-        try {
-            await axios.post(PUSH_ENDPOINT, { token: { token }});
-            AsyncStorage.setItem('pushToken', token)
-        } catch (e) {
-            console.log('error: ', e);
-        }
-    }
-}; */

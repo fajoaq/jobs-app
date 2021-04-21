@@ -1,6 +1,5 @@
 import 'react-native-gesture-handler';
 import React, { useReducer, useEffect, useState } from 'react';
-import { Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AppLoading from 'expo-app-loading';
@@ -71,21 +70,6 @@ export default function App() {
       registerForPushNotificationsAsync(notifyDispatch);
       Notifications.addNotificationReceivedListener(handleNotification);
       Notifications.addNotificationResponseReceivedListener(handleNotificationResponse);
-
-//old cold
-/*       await registerNotifications();
-
-      Notifications.addNotificationReceivedListener((notification) => {
-        const { data: { text }, origin } = notification;
-
-        if(origin === 'received' && text) {
-          Alert.alert(
-            'New Push Notification',
-            text,
-            [{ text: 'OK' }]
-          );
-        }
-}); */
 
       if(token) {
         const data = await AsyncStorage.getItem('likedJobs');
