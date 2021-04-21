@@ -54,7 +54,7 @@ const MapScreen = ({ navigation }) => {
                         <Button 
                             title="Search This Area"
                             backgroundColor="#009688"
-                            icon={{ name: 'search' }}
+                            icon={{ name: 'search', color: 'white' }}
                             onPress={ onButtonPress }
                             buttonStyle={ styles.button}
                         />

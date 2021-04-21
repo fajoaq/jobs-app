@@ -57,7 +57,7 @@ const ReviewScreen = ({ navigation }) => {
             <Card.Title style={ styles.title }>Like some jobs.</Card.Title>
             <Button 
                 title="New Search" 
-                icon={{ name: 'my-location' }}
+                icon={{ name: 'my-location', color: 'white' }}
                 buttonStyle={ styles.searchButton}
                 onPress={ () => navigation.navigate('map') }
             />

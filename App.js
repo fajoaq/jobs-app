@@ -3,7 +3,7 @@ import React, { useReducer, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AppLoading from 'expo-app-loading';
-/* import AsyncStorage from '@react-native-async-storage/async-storage'; */
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { fetchToken } from './actions/auth';
 import JobsReducer from './reducers/JobsReducer';
@@ -13,7 +13,6 @@ import AuthContext from './context/AuthContext';
 import AuthScreen from './screens/AuthScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import MainScreen from './screens/MainScreen'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RootStack = ({ initialScreen }) => {
   const WelcomeMain = createBottomTabNavigator();
@@ -57,7 +56,6 @@ export default function App() {
 
       setLoading(false);
     })();
-
   }, []);
 
   return (

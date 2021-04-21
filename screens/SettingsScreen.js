@@ -18,7 +18,7 @@ const SettingsScreen = ({ navigation }) => {
         <View>
             <Button 
                 title="Clear Jobs"
-                icon={{ name: 'delete-forever' }}
+                icon={{ name: 'delete-forever', color: 'white' }}
                 buttonStyle={ styles.deleteButton }
                 onPress={ onClearJobs }
             />

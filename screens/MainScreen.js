@@ -21,7 +21,7 @@ const MainScreen = () => {
                         <Icon
                             name='favorite'
                             size={ 25 }
-                            color={ focused ? '#4876FF' : '#999999'}
+                            color={ focused ? '#cc0000' : '#999999'}
                         />
                     )
                 }}
